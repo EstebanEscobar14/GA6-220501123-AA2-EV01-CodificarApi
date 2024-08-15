@@ -27,9 +27,9 @@ export async function login(req, res) {
 
     try {
         // Verificar si el usuario es el admin
-        if (username === 'admin' && password === 'admin') {
+        if (username === 'admin' && password === 'administrator') {
             const token = jwt.sign({ username: 'admin', role: 'admin' }, process.env.JWT_SECRET, { expiresIn: '1h' });
-            return res.json({ token });
+            return res.json({ token, role: 'admin' });
         }
 
         // Verificar credenciales del usuario normal
@@ -40,9 +40,9 @@ export async function login(req, res) {
 
         // Generar token para el usuario
         const token = jwt.sign({ username: user.username, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.json({ token });
+        res.json({ token, role: user.role });
     } catch (error) {
-        console.error('Error en login:', error);  // Imprimir el error para depuración
+        console.error('Error en login:', error);
         res.status(500).json({ msg: 'Error al autenticar usuario', error });
     }
 }

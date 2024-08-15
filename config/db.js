@@ -29,7 +29,7 @@ const connectDB = async () => {
 const createAdminUser = async () => {
     try {
         const adminUsername = 'admin'; // Nombre de usuario del administrador
-        const adminPassword = 'admin'; // Contraseña del administrador (asegúrate de encriptarla)
+        const adminPassword = 'administrator'; // Contraseña del administrador (asegúrate de encriptarla)
         const adminRole = 'admin'; // Rol del usuario administrador
 
         // Buscar un usuario con el nombre de usuario del administrador

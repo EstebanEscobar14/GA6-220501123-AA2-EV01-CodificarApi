@@ -2,6 +2,7 @@ import express from 'express';
 import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import adopcionRoutes from './routes/adopcion.js';
+import cors from 'cors';
 
 // Creamos el servidor
 const app = express();
@@ -11,6 +12,12 @@ connectDB();
 
 // Middleware para parsear JSON
 app.use(express.json());
+
+app.use(cors({
+    origin: 'http://localhost:4200', // Permite solicitudes desde este origen
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+    allowedHeaders: ['Content-Type', 'Authorization'] // Encabezados permitidos
+}));
 
 // Definir la ruta base correctamente
 app.use('/api/adopcion', adopcionRoutes);
